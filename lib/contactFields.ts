@@ -1,49 +1,51 @@
+export type FieldType = "text" | "textarea" | "tags";
+
 export interface ContactField {
-  name: string;
+  fieldName: string;
   label: string;
-  type: "text" | "textarea" | "tags";
+  type: FieldType;
   required?: boolean;
   displayAsHeading?: boolean;
   icon?: string;
 }
 
-export const contactFields: ContactField[] = [
+export const contactFieldDefs: ContactField[] = [
   {
-    name: "name",
+    fieldName: "name",
     label: "Full Name",
     type: "text",
     required: true,
-    displayAsHeading: true, // Show as card heading
+    displayAsHeading: true,
   },
   {
-    name: "role",
+    fieldName: "role",
     label: "Role",
     type: "text",
   },
   {
-    name: "companySchool",
+    fieldName: "companySchool",
     label: "Company or School",
     type: "text",
   },
   {
-    name: "phone",
+    fieldName: "phone",
     label: "Phone Number",
     type: "text",
     icon: "📞",
   },
   {
-    name: "email",
+    fieldName: "email",
     label: "Email Address",
     type: "text",
     icon: "✉️",
   },
   {
-    name: "notes",
+    fieldName: "notes",
     label: "Notes",
     type: "textarea",
   },
   {
-    name: "tags",
+    fieldName: "tags",
     label: "Tags",
     type: "tags",
   },

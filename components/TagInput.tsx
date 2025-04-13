@@ -18,23 +18,24 @@ export default function TagInput({
   const [allTags, setAllTags] = useState<string[]>([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem("allTags");
-    if (saved) {
-      setAllTags(JSON.parse(saved));
+    async function fetchTags() {
+      try {
+        const res = await fetch("/api/tags");
+        if (!res.ok) throw new Error("Failed to fetch tags");
+        const data = await res.json();
+        setAllTags(data);
+      } catch (err) {
+        console.error("Error loading suggested tags:", err);
+      }
     }
+
+    fetchTags();
   }, []);
 
   const addTag = (tag: string) => {
     const newTag = tag.trim();
     if (newTag && !value.includes(newTag) && value.length < maxTags) {
-      const updatedTags = [...value, newTag];
-      onChange(updatedTags);
-
-      setAllTags((prev) => {
-        const updated = prev.includes(newTag) ? prev : [...prev, newTag];
-        localStorage.setItem("allTags", JSON.stringify(updated));
-        return updated;
-      });
+      onChange([...value, newTag]);
     }
     setTagInput("");
   };

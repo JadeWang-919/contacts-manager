@@ -1,77 +1,82 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
-import { contactFields } from "@/lib/contactFields";
+import { Contact } from "@prisma/client";
+import { useState } from "react";
+import ConfirmModal from "./ConfirmModal";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface Props {
-  contact: Record<string, string | number | string[]>;
+  contact: Contact;
 }
 
-const ContactCard = ({ contact }: Props) => {
+export default function ContactCard({ contact }: Props) {
+  const router = useRouter();
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      const res = await fetch(`/api/contacts/${contact.id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Delete failed");
+
+      toast.success("Contact deleted");
+      router.refresh();
+    } catch (err) {
+      console.error("Failed to delete contact:", err);
+      toast.error("Failed to delete contact");
+    } finally {
+      setShowConfirm(false);
+    }
+  };
+
   return (
-    <div className="relative bg-white p-6 rounded-md shadow-md border-2 border-solid border-gray-100 hover:border-gray-300 hover:shadow-gray-300 transition duration-300 ease-in-out h-full flex flex-col">
-      {/* Icon buttons at top-right */}
-      <div className="absolute top-3 right-3 flex gap-2">
+    <div className="relative bg-white p-4 rounded-md shadow-md border border-gray-200 hover:border-gray-300 hover:shadow-lg transition duration-300 ease-in-out h-full flex flex-col justify-between">
+      {/* Action buttons */}
+      <div className="absolute top-4 right-4 flex gap-2">
         <Link href={`/contacts/${contact.id}`}>
           <button className="text-blue-500 hover:text-blue-700" title="Edit">
             ✏️
           </button>
         </Link>
-        <button className="text-red-500 hover:text-red-700" title="Delete">
+        <button
+          onClick={() => setShowConfirm(true)}
+          className="text-red-500 hover:text-red-700"
+          title="Delete"
+        >
           🗑️
         </button>
       </div>
 
-      {/* Card content */}
-      <div className="flex flex-col flex-grow space-y-3">
-        {contactFields.map((field) => {
-          const value = contact[field.name];
-          if (!value) return null;
+      {/* Contact content */}
+      <div className="space-y-2">
+        <h2 className="text-xl font-semibold">{contact.name}</h2>
 
-          // Heading display
-          if (field.displayAsHeading) {
-            return (
-              <h2 key={field.name} className="text-xl font-semibold">
-                {value}
-              </h2>
-            );
-          }
+        {(contact.role || contact.companySchool) && (
+          <p className="text-sm text-gray-500">
+            {contact.role}
+            {contact.role && contact.companySchool ? " at " : ""}
+            {contact.companySchool}
+          </p>
+        )}
 
-          // Role at companySchool
-          if (field.name === "role") {
-            const company = contact["companySchool"];
-            if (!value && !company) return null;
-            return (
-              <p key="role-company" className="text-sm text-gray-500">
-                {value}
-                {value && company ? " at " : ""}
-                {company}
-              </p>
-            );
-          }
-
-          if (field.name === "companySchool") {
-            return null;
-          }
-
-          if (field.name === "tags") {
-            return null;
-          }
-
-          return (
-            <div key={field.name}>
-              <p className="text-sm text-gray-700">
-                {field.icon ? `${field.icon} ` : ""}
-                {field.label}: {value}
-              </p>
-            </div>
-          );
-        })}
+        {contact.phone && (
+          <p className="text-sm text-gray-700">📞 {contact.phone}</p>
+        )}
+        {contact.email && (
+          <p className="text-sm text-gray-700">✉️ {contact.email}</p>
+        )}
+        {contact.notes && (
+          <p className="text-sm text-gray-600 mt-4">Notes: {contact.notes}</p>
+        )}
       </div>
 
-      {/* Tags row */}
-      {Array.isArray(contact.tags) && contact.tags.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-2">
-          {contact.tags.map((tag: string) => (
+      {contact.tags.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {contact.tags.map((tag) => (
             <span
               key={tag}
               className="bg-blue-100 text-blue-700 text-sm px-3 py-1 rounded-full"
@@ -81,8 +86,16 @@ const ContactCard = ({ contact }: Props) => {
           ))}
         </div>
       )}
+
+      {/* Confirmation Modal */}
+      {showConfirm && (
+        <ConfirmModal
+          title="Delete Contact"
+          message="Are you sure you want to delete this contact?"
+          onCancel={() => setShowConfirm(false)}
+          onConfirm={handleDelete}
+        />
+      )}
     </div>
   );
-};
-
-export default ContactCard;
+}
