@@ -82,12 +82,12 @@ export default function TagInput({
           }
         }}
         placeholder="Type and press Enter to add tag"
-        className="w-full border border-gray-400 p-2 rounded text-sm"
+        className="w-full border border-gray-400 p-2 rounded text-sm text-gray-500"
       />
 
       {/* Suggested tags */}
       {allTags.length > 0 && (
-        <div className="text-sm text-gray-600 dark:text-zinc-200">
+        <div className="text-sm text-gray-500">
           <p className="my-2">Suggestions:</p>
           <div className="flex flex-wrap gap-2 max-w-full overflow-x-auto">
             {allTags.map((tag) => (
@@ -96,7 +96,7 @@ export default function TagInput({
                 onClick={() => addTag(tag)}
                 disabled={value.includes(tag)}
                 type="button"
-                className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 dark:hover:bg-zinc-700 text-base disabled:opacity-50"
+                className="px-3 py-1 border text-gray-600 dark:text-gray-500 border-gray-300 rounded hover:bg-gray-100 dark:hover:bg-zinc-700 text-base disabled:opacity-50"
               >
                 {tag}
               </button>
