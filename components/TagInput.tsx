@@ -96,7 +96,7 @@ export default function TagInput({
                 onClick={() => addTag(tag)}
                 disabled={value.includes(tag)}
                 type="button"
-                className="px-3 py-1 border text-gray-600 dark:text-gray-500 border-gray-300 rounded hover:bg-gray-100 dark:hover:bg-zinc-700 text-base disabled:opacity-50"
+                className="px-3 py-1 border text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-500 rounded hover:bg-gray-100 dark:hover:bg-zinc-700 text-base disabled:opacity-50"
               >
                 {tag}
               </button>
