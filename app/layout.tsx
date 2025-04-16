@@ -34,7 +34,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
         >
           <div className="flex flex-col min-h-screen" id="app-content">
-            <header className="sticky top-0 z-50 w-full bg-white shadow-md px-6 md:px-8">
+            <header className="sticky top-0 z-50 w-full bg-white shadow-md px-4 md:px-6">
               <div className="flex justify-between items-center h-16 max-w-6xl w-full mx-auto">
                 <Link href="/" className="flex items-center">
                   {/* Large screen logo */}
@@ -71,7 +71,7 @@ export default function RootLayout({
               </div>
             </header>
 
-            <main className="flex-grow w-full flex px-6 md:px-8">
+            <main className="flex-grow w-full flex px-4 md:px-6">
               <div className="flex max-w-6xl w-full mx-auto">{children}</div>
             </main>
           </div>
