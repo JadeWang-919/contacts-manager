@@ -87,8 +87,8 @@ export default function TagInput({
 
       {/* Suggested tags */}
       {allTags.length > 0 && (
-        <div className="text-sm text-gray-600">
-          <p className="mb-1">Suggestions:</p>
+        <div className="text-sm text-gray-600 dark:text-zinc-200">
+          <p className="my-2">Suggestions:</p>
           <div className="flex flex-wrap gap-2 max-w-full overflow-x-auto">
             {allTags.map((tag) => (
               <button
@@ -96,7 +96,7 @@ export default function TagInput({
                 onClick={() => addTag(tag)}
                 disabled={value.includes(tag)}
                 type="button"
-                className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 text-base disabled:opacity-50"
+                className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 dark:hover:bg-zinc-700 text-base disabled:opacity-50"
               >
                 {tag}
               </button>

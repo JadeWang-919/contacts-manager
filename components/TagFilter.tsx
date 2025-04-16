@@ -13,7 +13,9 @@ export default function TagFilter({ allTags }: TagFilterProps) {
 
   return (
     <div className="mb-4">
-      <p className="text-sm text-gray-600 mb-2 font-medium">Filter by tags:</p>
+      <p className="text-sm text-gray-600 dark:text-zinc-300 mb-2 font-medium">
+        Filter by tags:
+      </p>
       <div className="flex flex-wrap gap-2 mb-2">
         {allTags.map((tag) => {
           const isActive = selectedTags.includes(tag);
@@ -24,7 +26,7 @@ export default function TagFilter({ allTags }: TagFilterProps) {
               className={`px-3 py-1 rounded-full text-sm border transition-colors duration-300 ease-in-out ${
                 isActive
                   ? "bg-emerald-100 text-teal-700 border-teal-400"
-                  : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                  : "bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-200 border-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700"
               }`}
             >
               {tag}

@@ -79,7 +79,7 @@ export default function ContactForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       {contactFieldDefs.map((field) => {
         // field looks like this:  { fieldName: "name", label: "Name", required: true, type: "text" },
         const fieldName = field.fieldName as keyof ContactFormData;
@@ -155,7 +155,7 @@ export default function ContactForm({
         <button
           type="button"
           onClick={() => router.push("/contacts")}
-          className="text-gray-600 hover:underline"
+          className="text-gray-600 dark:text-zinc-200 hover:underline"
           disabled={isSubmitting}
         >
           Cancel

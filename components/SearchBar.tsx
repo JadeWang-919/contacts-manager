@@ -9,8 +9,8 @@ export default function SearchInput() {
   const setQuery = useSearchStore((state) => state.setQuery);
 
   return (
-    <div className="flex items-center gap-2 bg-white ring-1 ring-gray-300 rounded-md px-3 py-2 focus-within:ring-2 focus-within:ring-emerald-200 transition w-64">
-      <IoSearch className="text-gray-400 text-lg" />
+    <div className="flex items-center gap-2 bg-white dark:bg-zinc-800 ring-1 ring-gray-300 dark:ring-zinc-600 rounded-md px-3 py-2 focus-within:ring-2 focus-within:ring-emerald-200 transition w-64">
+      <IoSearch className="text-gray-400 dark:text-zinc-600 text-lg" />
       <input
         type="text"
         placeholder="Search your contacts..."
