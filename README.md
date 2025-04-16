@@ -19,7 +19,7 @@ You can try the app instantly using the following test credentials:
 - 📝 **Create / Edit / Delete** contacts
 - 🏷️ Add and manage multiple **tags** per contact
 - 🔍 **Search and filter** by name, role, company, notes, or tags
-- 🎨 **Responsive** UI optimized for all screen sizes
+- 🎨 **Responsive** UI optimized for all screen sizes with system-based dark mode support
 - ♿️ **Accessibility-first design** (focus trap, escape to close modal, keyboard navigation)
 - ✅ **Unit tested** with Jest and React Testing Library
 - ☁️ **Deployed** with Vercel and Prisma Accelerate
