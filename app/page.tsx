@@ -40,7 +40,7 @@ export default function HomePage() {
           </SignUpButton>
 
           <SignInButton mode="modal">
-            <button className="border border-gray-400 text-gray-700 px-4 py-2 rounded hover:bg-gray-100 transition duration-300 ease-in-out">
+            <button className="border border-gray-400 text-gray-700 dark:text-white px-4 py-2 rounded bg-white dark:bg-zinc-800 hover:bg-gray-100 dark:hover:bg-zinc-600 transition duration-300 ease-in-out">
               I already have an account
             </button>
           </SignInButton>
