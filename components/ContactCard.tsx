@@ -23,7 +23,7 @@ export default function ContactCard({ contact, onDeleteRequest }: Props) {
 
       {/* Top content */}
       <div className="space-y-1">
-        <h2 className="text-xl font-semibold">{contact.name}</h2>
+        <h2 className="text-xl text-gray-800 font-semibold">{contact.name}</h2>
 
         {(contact.role || contact.companySchool) && (
           <p className="text-sm text-gray-500 pb-2">
@@ -42,24 +42,26 @@ export default function ContactCard({ contact, onDeleteRequest }: Props) {
       </div>
 
       {/* Bottom-aligned notes and tags */}
-      <div className="mt-auto pt-4 flex flex-col gap-2">
-        {contact.notes && (
-          <p className="text-sm text-gray-600">Notes: {contact.notes}</p>
-        )}
+      {(contact.notes || contact.tags.length > 0) && (
+        <div className="mt-auto pt-4 flex flex-col gap-2">
+          {contact.notes && (
+            <p className="text-sm text-gray-600">Notes: {contact.notes}</p>
+          )}
 
-        {contact.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {contact.tags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-emerald-100 text-teal-700 text-sm px-3 py-1 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
+          {contact.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {contact.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-emerald-100 text-teal-700 text-sm px-3 py-1 rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

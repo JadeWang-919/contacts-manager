@@ -31,7 +31,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-white`}
         >
           <div className="flex flex-col min-h-screen" id="app-content">
             <header className="sticky top-0 z-50 w-full bg-white shadow-md px-4 md:px-6">

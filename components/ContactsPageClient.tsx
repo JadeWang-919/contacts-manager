@@ -79,9 +79,18 @@ export default function ContactsPageClient({ contacts }: Props) {
 
         {/* Empty state */}
         {contacts.length === 0 && (
-          <div className="flex justify-center items-center flex-col gap-2">
-            <Image src="/discuss.svg" alt="My Icon" width={400} height={320} />
-            <p className="text-center">Start by adding your first contact!</p>
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="flex justify-center items-center flex-col gap-4">
+              <Image
+                src="/discuss.svg"
+                alt="My Icon"
+                width={400}
+                height={320}
+              />
+              <p className="text-center text-gray-500">
+                Start by adding your first contact!
+              </p>
+            </div>
           </div>
         )}
 
