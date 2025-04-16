@@ -30,13 +30,13 @@ You can try the app instantly using the following test credentials:
 
 Displays the searchable and tag-filterable contact cards.
 
-![Contact List](public/contacts.jpg)
+![Contact List](public/contacts.png)
 
 ### ➕ Add / Edit Contact Form
 
 Accessible form with validation, tag input, and responsive layout.
 
-![Contact Form](public/edit.jpg)
+![Contact Form](public/edit.png)
 
 ## 🛠️ Tech Stack
 
