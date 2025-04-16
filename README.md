@@ -6,6 +6,13 @@ A sleek and minimal contact management app built with Next.js 15, Tailwind CSS, 
 
 Live on [Vercel](https://mini-contacts-manager.vercel.app/)
 
+You can try the app instantly using the following test credentials:
+
+- **Email:** `demo@test.com`
+- **Password:** `pass09876~`
+
+✅ Feel free to create, edit, or delete contacts while testing!
+
 ## ✨ Features
 
 - 🔐 **Authentication** with Clerk
