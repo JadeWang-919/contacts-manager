@@ -45,24 +45,24 @@ export default function TagInput({
   };
 
   return (
-    <div className="w-full space-y-2 md:pt-2">
+    <div className="w-full space-y-2">
       {/* Tag counter */}
       <div className="text-sm text-gray-500">
         {value.length}/{maxTags} tags
       </div>
 
       {/* Selected tags */}
-      <div className="flex flex-wrap gap-2 mb-2 max-w-full">
+      <div className="flex flex-wrap gap-2 max-w-full">
         {value.map((tag) => (
           <span
             key={tag}
-            className="bg-blue-100 text-blue-700 text-base px-3 py-1 rounded-full flex items-center"
+            className="bg-emerald-100 text-teal-700 text-base px-3 py-1 rounded-full flex items-center"
           >
             {tag}
             <button
               type="button"
               onClick={() => removeTag(tag)}
-              className="ml-1 text-blue-500 hover:text-blue-700"
+              className="ml-1 text-teal-600 hover:text-teal-800 transition duration-200 ease-in-out"
             >
               <IoCloseOutline />
             </button>
@@ -87,9 +87,9 @@ export default function TagInput({
 
       {/* Suggested tags */}
       {allTags.length > 0 && (
-        <div className="mt-2 text-sm text-gray-600">
+        <div className="text-sm text-gray-600">
           <p className="mb-1">Suggestions:</p>
-          <div className="flex flex-wrap gap-2 max-w-full overflow-x-auto pb-1">
+          <div className="flex flex-wrap gap-2 max-w-full overflow-x-auto">
             {allTags.map((tag) => (
               <button
                 key={tag}

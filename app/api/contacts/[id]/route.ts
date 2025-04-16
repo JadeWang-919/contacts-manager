@@ -3,10 +3,13 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { contactSchema } from "@/lib/contactSchema";
 
-// GET a contact
-export async function GET(req: Request, context: { params: { id: string } }) {
+// GET a single contact
+export async function GET(
+  _req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   const { userId } = await auth();
-  const { id } = context.params;
+  const { id } = await params;
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -22,8 +25,12 @@ export async function GET(req: Request, context: { params: { id: string } }) {
 }
 
 // PATCH a contact
-export async function PATCH(req: Request, context: { params: { id: string } }) {
+export async function PATCH(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   const { userId } = await auth();
+  const { id } = await params;
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -39,7 +46,6 @@ export async function PATCH(req: Request, context: { params: { id: string } }) {
     );
   }
 
-  const { id } = context.params;
   const data = {
     ...result.data,
     email: result.data.email?.trim() || null,
@@ -97,11 +103,11 @@ export async function PATCH(req: Request, context: { params: { id: string } }) {
 
 // DELETE a contact
 export async function DELETE(
-  req: Request,
-  context: { params: { id: string } }
+  _req: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const { userId } = await auth();
-  const { id } = context.params;
+  const { id } = await params;
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

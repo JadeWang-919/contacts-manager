@@ -16,7 +16,9 @@ export async function GET() {
       select: { tags: true },
     });
 
-    const allTags = Array.from(new Set(contacts.flatMap((c) => c.tags || [])));
+    const allTags = Array.from(
+      new Set(contacts.flatMap((c: { tags: string[] | null }) => c.tags || []))
+    );
 
     return NextResponse.json(allTags);
   } catch (err) {

@@ -13,12 +13,21 @@ const baseSchema = Object.fromEntries(
 
     if (field.fieldName === "email") {
       schema = z
-        .union([z.string().email("Invalid email"), z.literal(""), z.null()])
+        .union([
+          z.string().email("Please enter a valid email address"),
+          z.literal(""),
+          z.null(),
+        ])
         .optional();
     } else if (field.fieldName === "phone") {
       schema = z
         .union([
-          z.string().regex(/^[+]?[\d\s\-().]{7,20}$/, "Invalid phone number"),
+          z
+            .string()
+            .regex(
+              /^[+]?[\d\s\-().]{7,20}$/,
+              "Please enter a valid phone number"
+            ),
           z.literal(""),
           z.null(),
         ])

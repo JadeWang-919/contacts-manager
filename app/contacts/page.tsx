@@ -1,7 +1,7 @@
 import { Contact } from "@prisma/client";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
-import ContactsList from "@/components/ContactsList";
+import ContactsPageClient from "@/components/ContactsPageClient";
 
 async function getContacts(): Promise<Contact[]> {
   const { userId } = await auth();
@@ -16,5 +16,5 @@ async function getContacts(): Promise<Contact[]> {
 export default async function ContactsPage() {
   const contacts = await getContacts();
 
-  return <ContactsList contacts={contacts} />;
+  return <ContactsPageClient contacts={contacts} />;
 }

@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { contactSchema, ContactFormData } from "@/lib/contactSchema";
 import { contactFieldDefs } from "@/lib/contactFields";
-import TagInput from "./TagInput";
 import toast from "react-hot-toast";
+import TagInput from "./TagInput";
 
 type ContactFormProps = {
   initialData?: ContactFormData;
@@ -39,7 +39,7 @@ export default function ContactForm({
     e.preventDefault();
     setIsSubmitting(true);
 
-    const result = contactSchema.safeParse(formData);
+    const result = contactSchema.safeParse(formData); //validate formData against the schema.
     if (!result.success) {
       const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
       result.error.errors.forEach((err) => {
@@ -81,13 +81,14 @@ export default function ContactForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {contactFieldDefs.map((field) => {
+        // field looks like this:  { fieldName: "name", label: "Name", required: true, type: "text" },
         const fieldName = field.fieldName as keyof ContactFormData;
         const value = formData[fieldName]; // e.g., value=formData["email"], might be a string or null
-        const error = errors[fieldName];
+        const error = errors[fieldName]; // errors looks like this: { name: "Name is required", email: "Invalid email" } or {}
 
         return (
           <div
-            key={field.fieldName}
+            key={field.fieldName} // e.g., field.fieldName="email". Can not use fieldName because it is a string type, not a plain string.
             className="flex flex-col md:flex-row md:items-start gap-1 md:gap-4 w-full"
           >
             <label
@@ -98,7 +99,7 @@ export default function ContactForm({
               {field.required && <span className="text-red-500 ml-1">*</span>}
             </label>
 
-            <div className="flex-1 w-full">
+            <div className="flex-1">
               {field.type === "tags" ? (
                 <TagInput
                   value={value as string[]}
@@ -116,7 +117,7 @@ export default function ContactForm({
                       [fieldName]: e.target.value,
                     })
                   }
-                  className="w-full border border-gray-400 p-2 rounded"
+                  className="w-full border border-gray-400 p-2 rounded leading-none align-top"
                   rows={4}
                 />
               ) : (
@@ -133,7 +134,7 @@ export default function ContactForm({
                   className="w-full border border-gray-400 p-2 rounded"
                 />
               )}
-              {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
+              {error && <p className="text-sm text-red-400 mt-1">{error}</p>}
             </div>
           </div>
         );
@@ -143,7 +144,7 @@ export default function ContactForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:shadow-md hover:bg-blue-600 transition duration-300 ease-in-out"
+          className="bg-teal-500 text-white px-4 py-2 rounded-md hover:shadow-md hover:bg-teal-600 transition duration-300 ease-in-out"
         >
           {isSubmitting
             ? "Saving..."
@@ -154,7 +155,7 @@ export default function ContactForm({
         <button
           type="button"
           onClick={() => router.push("/contacts")}
-          className="text-gray-600 underline"
+          className="text-gray-600 hover:underline"
           disabled={isSubmitting}
         >
           Cancel

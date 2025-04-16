@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { ContactFormData } from "@/lib/contactSchema";
 import ContactForm from "@/components/ContactForm";
 import toast from "react-hot-toast";
+import BarLoader from "react-spinners/BarLoader";
 
 export default function EditContactPage() {
   const { id } = useParams();
@@ -29,12 +30,17 @@ export default function EditContactPage() {
     fetchContact();
   }, [id]);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading)
+    return (
+      <div className="w-full flex items-center justify-center">
+        <BarLoader color="##5cdfa3" loading={loading} />
+      </div>
+    );
   if (!formData)
     return <p className="text-center text-red-500 mt-10">Contact not found.</p>;
 
   return (
-    <div>
+    <div className="w-full">
       <h1 className="text-2xl font-bold mb-4">Edit Contact</h1>
       <ContactForm initialData={formData} contactId={id as string} />
     </div>
