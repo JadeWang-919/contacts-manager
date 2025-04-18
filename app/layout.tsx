@@ -20,6 +20,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Mini Contact Manager",
   description: "Manage your contacts easily",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
